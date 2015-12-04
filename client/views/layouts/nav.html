@@ -1,0 +1,55 @@
+<template name="nav">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <div class="navbar-fixed">
+        <nav class="main-nav red accent-2">
+            <div class="nav-wrapper">
+                <a href="{{pathFor 'home'}}" class="brand-logo ">MSC</a>
+
+                <ul class="right hide-on-med-and-down">
+                {{#if currentUser}}
+
+                    <li><a href="{{pathFor 'new-event'}}"> <i class="material-icons large">add</i></a></li>
+                    <li class="{{isActiveRoute regex='login'}}"><a href="" onclick="openLogoutModal()">Logout</a></li>
+
+                {{else}}
+                    <!--<li class="{{isActiveRoute regex='home'}}"><a href="{{pathFor 'home'}}">Home</a></li>-->
+                    <li><a href="http://www.mustery.com" target="_blank">Blog</a></li>
+                    <li class="{{isActiveRoute regex='login'}}"><a href="{{pathFor 'login'}}">Login</a></li>
+                {{/if}}
+                </ul>
+                <ul id="slide-out" class="right side-nav">
+                    <li class="{{isActiveRoute regex='login'}}"><a href="{{pathFor 'login'}}">Login</a></li>
+                </ul>
+                <a href="#" data-activamvates="slide-out" class="right button-collapse"><i class="mdi-navigation-menu"></i></a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <h4>Just double confirming...</h4>
+            <p>You're leaving too soon... </p>
+        </div>
+        <div class="modal-footer">
+            <a href="" onclick="logout()" class="modal-action modal-close waves-effect waves-red btn-flat red accent-1">Yes, log me out..</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">Bring me back!</a>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            openLogoutModal = function(){
+                $('#logoutModal').openModal();
+            }
+
+            logout = function() {
+                AccountsTemplates.logout();
+                Materialize.toast('See you again!', 2500)
+            }
+        });
+
+
+    </script>
+</template>
